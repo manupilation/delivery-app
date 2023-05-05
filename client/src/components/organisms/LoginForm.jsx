@@ -28,6 +28,9 @@ import { loginRequest } from '../../services/request';
 /* Styles */
 import Form from '../atoms/Form';
 
+/* Hooks */
+import useFetch from '../../hooks/UseFetch';
+
 export default function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,6 +41,7 @@ export default function LoginForm() {
   const [passwordErrVisible, setPasswordErrVisible] = useState(false);
   const [loginErrVisible, setLoginErrVisible] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(true);
+  const {loading, error, request} = useFetch();
 
   // Enable Submit
   useEffect(() => {
@@ -53,7 +57,7 @@ export default function LoginForm() {
     e.preventDefault();
 
     try {
-      const user = await loginRequest({ email, password });
+      const {response: user} = await request(loginRequest, { email, password });
 
       if (user) {
         dispatch(setUser(user));
@@ -70,7 +74,6 @@ export default function LoginForm() {
         }
       }
     } catch (err) {
-      console.log(err);
       setLoginErrVisible(true);
     }
   };
@@ -78,11 +81,11 @@ export default function LoginForm() {
   return (
     <Form id="login-form" action="">
       {
-        loginErrVisible && (
+        error && (
           <ErrorMessageBox
             id="user-not-found"
             dataTestId="common_login__element-invalid-email"
-            message={ messages.login.notFound }
+            message={messages.login.notFound }
           />
         )
       }
@@ -137,15 +140,24 @@ export default function LoginForm() {
       </Fieldset>
 
       <div className="form__button-group">
-        <Button
-          id="login-btn"
-          type="submit"
-          dataTestId="common_login__button-login"
-          handleOnClick={ (e) => handleSubmit(e) }
-          disabled={ submitDisabled }
+        { loading ? (
+          <Button
+          id="loading-btn"
+          type="button"
         >
-          Login
+          Carregando...
         </Button>
+        ) : 
+          (<Button
+            id="login-btn"
+            type="submit"
+            dataTestId="common_login__button-login"
+            handleOnClick={ (e) => handleSubmit(e) }
+            disabled={ submitDisabled }
+          >
+            Login
+          </Button>)
+        }
 
         <HorizontalRule />
 

@@ -21,5 +21,9 @@ export default styled('form', {
       gap: '$1',
       justifyContent: 'center',
     },
+    '&>#loading-btn': {
+      cursor: 'wait',
+      opacity: '0.9',
+    },
   },
 });

@@ -7,7 +7,7 @@ import { BsArrowUp as ArrowUp } from 'react-icons/bs';
 import Styled from './Styled';
 
 export default function SideBar() {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
 
   return (
     <Styled>
