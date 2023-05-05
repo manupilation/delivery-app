@@ -12,12 +12,17 @@ import LocalStorageMethods from '../../../utils/localStorage';
 /* Styles */
 import { ClassicLayout } from '../../templates';
 import Styled from './Styled';
+import MetaHead from '../../helper/MetaHead';
 
 export default function Account() {
   const { name, email } = LocalStorageMethods.getParsedItem('user');
 
   return (
     <ClassicLayout>
+      <MetaHead
+        title="My account"
+        description="Check your personal data and more on your personal page."
+      />
       <Styled>
         <header>
           <div className="ImageContainer">

@@ -13,6 +13,7 @@ import LocalStorageMethods from '../../../utils/localStorage';
 /* Styles */
 import { ClassicLayout } from '../../templates';
 import Styled from './Styled';
+import MetaHead from '../../helper/MetaHead';
 
 export default function Orders() {
   const dispatch = useDispatch();
@@ -30,6 +31,10 @@ export default function Orders() {
 
   return (
     <ClassicLayout>
+      <MetaHead
+        title="My orders"
+        description="Check your order list."
+      />
       <Styled>
         {
           orders.length

@@ -26,6 +26,7 @@ import LocalStorageMethods from '../../utils/localStorage';
 
 /* Styles */
 import { ClassicLayout } from '../templates';
+import MetaHead from '../helper/MetaHead';
 
 const extraStyles = {
   '@bp3': {
@@ -83,6 +84,10 @@ const Products = () => {
       id="products-page"
       css={ extraStyles }
     >
+      <MetaHead 
+        title="Meet our products"
+        description="Discover our high quality products."
+      />
       <SideBar />
 
       {

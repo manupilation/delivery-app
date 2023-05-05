@@ -10,6 +10,7 @@ import { RegisterForm } from '../../organisms';
 /* Styles */
 import { DuoGeneric } from '../../templates';
 import { ContentWrapper, DecorOne, DecorTwo } from './Styled';
+import MetaHead from '../../helper/MetaHead';
 
 const extraStyles = {
   // Place form content at the bottom and teaser at the top
@@ -26,6 +27,10 @@ export default function Register() {
       id="register-page"
       css={ extraStyles }
     >
+      <MetaHead
+        title="Create my account"
+        description="Create your account! It's simple and fast!"
+      />
       <ContentWrapper id="form-content">
         <h1 id="title">Sign Up to Deliveree</h1>
 
