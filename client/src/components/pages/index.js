@@ -7,3 +7,4 @@ export { default as Register } from './Register';
 export { default as Products } from './Products';
 export { default as Splash } from './Splash';
 export { default as LostPass } from './LostPass';
+export { default as ResetPass } from './ResetPass';
