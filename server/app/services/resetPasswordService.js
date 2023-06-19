@@ -1,20 +1,29 @@
 const resetPasswordModel = require('../models/resetPasswordModel');
-const { JwtMethods } = require('../utils/JwtMethods');
+const { CryptData } = require('../utils/CryptData');
+const cryptData = new CryptData();
 
 module.exports = {
-  async resetPassword({ token = '', newPass, email }) {
-    if (token === '') throw new Error('Token not found');
-    const verifyToken = JwtMethods.verifyToken(token);
+  async resetPassword({ token = '', newPass }) {
+    try {
+      if (token === '') throw new Error('Token not found');
 
-    if (!verifyToken) throw new Error('Token invalid or expired');
+      const decodeToken = cryptData.decryptString(token);
 
-    const resetPass = await resetPasswordModel.resetPassword({ email, newPass });
+      const [code, timestamp] = cryptData.trataToken(decodeToken);
 
-    return resetPass;
+      verifyToken(timestamp);
+
+      const resetPass = await resetPasswordModel.resetPassword({ email: code, newPass });
+
+      return resetPass;
+
+    } catch (err) {
+      throw new Error('Token invalid or expired');
+    }
   },
 
   async sendResetEmail(email, url) {
-    const token = JwtMethods.jwtResetPass({ email });
+    const token = cryptData.encryptString(email);
 
     const sendEmail = await resetPasswordModel.sendResetEmail(email, url, token);
 
