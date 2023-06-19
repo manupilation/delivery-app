@@ -13,15 +13,6 @@ class JwtMethods {
     return sign;
   }
 
-  static jwtResetPass(payload) {
-    const sign = jwt.sign(payload, JWT_SECRET, {
-      expiresIn: '1h',
-      algorithm: 'HS256',
-    });
-
-    return sign;
-  }
-
   static verifyToken(token) {
     const verifying = jwt.verify(token, JWT_SECRET, { algorithms: ['HS256'] });
 
