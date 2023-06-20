@@ -60,4 +60,4 @@ class CryptData {
   }
 }
 
-exports.module = { CryptData };
+module.exports = { CryptData };
