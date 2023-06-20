@@ -20,7 +20,6 @@ export default function Header() {
 
   // Conditional Render
   const excludeRoutes = [
-    '/',
     '/login',
     '/register',
     '/lostPassword',
