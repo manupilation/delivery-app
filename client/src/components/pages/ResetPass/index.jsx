@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ResetPassContainer from './Styled';
 import { Button, Label, TextInput } from '../../atoms';
 import MetaHead from '../../helper/MetaHead';
 import CenterBox from '../../templates/CenterBox';
+import { sendResetPassword } from '../../../services/request';
+import { ErrorMessageBox, SuccessMessageBox } from '../../molecules';
 
 const ResetPass = () => {
   const { token } = useParams();
+  const navigate = useNavigate();
   const [newPass, setNewPass] = useState('');
   const [confirmNewPass, setConfirmNewPass] = useState('');
+  const [visibleError, setVisibleError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   function onChangePass(target) {
     setNewPass(target.value);
@@ -16,6 +21,23 @@ const ResetPass = () => {
 
   function onChangeConfirmPass(target) {
     setConfirmNewPass(target.value);
+  }
+
+  async function fetchNewPassword(event) {
+    event.preventDefault();
+    try {
+      const reset = await sendResetPassword(token, newPass);
+      if(reset.confirm === 'ok') {
+        setSuccess(true);
+      }
+    } catch(err) {
+      setVisibleError(true);
+    } finally {
+      setTimeout(() => {
+        navigate('/login');
+      }, 4000);
+    }
+
   }
 
   return (
@@ -47,11 +69,13 @@ const ResetPass = () => {
           </Label>
           <Button
             type="submit"
-            handleOnClick={() => {}}
-            disabled={!(newPass.length < 5) && newPass !== confirmNewPass }
+            handleOnClick={fetchNewPassword}
+            disabled={!(newPass.length > 5) || (newPass !== confirmNewPass)}
           >
             Enviar
           </Button>
+          { visibleError && <ErrorMessageBox message='Error: Invalid or expired token'></ErrorMessageBox> }
+          { success && <SuccessMessageBox message='Everything worked!'></SuccessMessageBox> }
         </form>
       </ResetPassContainer>
     </CenterBox>
