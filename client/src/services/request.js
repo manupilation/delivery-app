@@ -73,6 +73,12 @@ const sendResetEmail = async (email, url) => {
   return data;
 };
 
+const sendResetPassword = async (token, newPass) => {
+  const {data} = await instanceApi.post('/reset/password', {token, newPass});
+
+  return data;
+}
+
 export {
   createSale,
   getAllOrders,
@@ -83,4 +89,5 @@ export {
   registerRequest,
   updateOrder,
   sendResetEmail,
+  sendResetPassword
 };
