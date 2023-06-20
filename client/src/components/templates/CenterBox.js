@@ -7,9 +7,6 @@ export default styled('div', {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-
-  padding: '',
-
   background: '$gray100',
 
   '@bp3': {
