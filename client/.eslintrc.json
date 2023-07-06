@@ -1,4 +1,7 @@
 {
   "root": true,
+  "rules": {
+    "no-unsafe-finally": 0
+  },
   "extends": ["trybe-frontend"]
 }

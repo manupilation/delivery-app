@@ -15,7 +15,7 @@ const ResetPassForm = () => {
 
   async function submitResetPass(event) {
     event.preventDefault();
-    const localResetPassUrl = window.location.href.replace('/lostPassword', '/resetPassword');
+    const localResetPassUrl = window.location.href.replace('/lostPassword', '/resetPass');
     const data = await sendResetEmail(email, localResetPassUrl);
 
     if(data.confirm === 'ok') {

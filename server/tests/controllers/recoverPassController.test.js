@@ -1,7 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { resetPasswordUserData, resetPassWithoutEmail, resetPassWithoutNewPass } = require('../mocks/resetPass');
-const { JwtMethods } = require('../../app/utils/JwtMethods');
 const recoverPassController = require('../../app/controllers/resetPasswordController');
 const recoverPassService = require('../../app/services/resetPasswordService');
 const { userMock } = require('../mocks/Database');
@@ -13,9 +12,6 @@ describe('Tests resetPasswordController', function () {
       sinon.restore();
     });
 
-    beforeEach(function () {
-      token = sinon.stub(JwtMethods, 'jwtResetPass').returns('token');
-    });
 
     it('User does not have email', async function () {
       const req = { body: { ...resetPassWithoutEmail, token } };

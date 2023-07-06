@@ -22,16 +22,16 @@ const useFetch = () => {
     } finally {
       setData(json);
       setLoading(false);
-      return {response, json}
+      return { response, json };
     }
-  }, [])
+  }, []);
 
   return {
     data,
     loading,
     error,
     request,
-  }
+  };
 };
 
 export default useFetch;

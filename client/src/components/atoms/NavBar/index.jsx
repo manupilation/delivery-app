@@ -23,9 +23,12 @@ export default function NavBar({ iconbar }) {
     '/login',
     '/register',
     '/lostPassword',
+    '/resetPass/',
   ];
 
-  const shouldRender = !excludeRoutes.includes(pathname);
+  const shouldRender = !excludeRoutes.some(route => {
+    return pathname.startsWith(route);
+  });
 
   const dispatch = useDispatch();
 

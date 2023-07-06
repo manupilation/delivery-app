@@ -27,3 +27,5 @@ jobs:
         run: cd server && npm run test
         env:
             JWT_SECRET: ${{ secrets.JWT_SECRET }}
+            CRYPT_IV: ${{ secrets.CRYPT_IV }}
+            CRYPT_KEY: ${{ secrets.CRYPT_KEY }}

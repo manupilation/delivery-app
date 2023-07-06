@@ -20,13 +20,15 @@ export default function Header() {
 
   // Conditional Render
   const excludeRoutes = [
-    '/',
     '/login',
     '/register',
-    '/lostPassword'
+    '/lostPassword',
+    '/resetPass/'
   ];
 
-  const shouldRender = !excludeRoutes.includes(pathname);
+  const shouldRender = !excludeRoutes.some(route => {
+    return pathname.startsWith(route);
+  });
 
   // Conditional Styless
   const hideOn = [

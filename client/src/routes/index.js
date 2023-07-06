@@ -20,6 +20,7 @@ import {
   Register,
   Splash,
   LostPass,
+  ResetPass,
 } from '../components/pages';
 
 function AppRoutes() {
@@ -37,6 +38,7 @@ function AppRoutes() {
         <Route path="/customer/products" element={ <Products /> } />
         <Route path="/account" element={ <Account /> } />
         <Route path="/lostPassword" element={ <LostPass /> } />
+        <Route path="/resetPass/:token" element={ <ResetPass /> } />
         <Route path="/register" element={ <Register /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/" element={ <Splash /> } />
