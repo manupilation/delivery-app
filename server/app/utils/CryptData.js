@@ -11,7 +11,7 @@ class CryptData {
   }
 
   encryptString(message) {
-    message += "-" + generateTimestamp();
+    message += "-" + this.generateTimestamp();
     let encryptor = crypto.createCipheriv(this.method, this.key, this.iv);
     let aes_encrypted = encryptor.update(message , 'utf-8', 'base64') + encryptor.final('base64');
 
